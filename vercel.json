@@ -1,0 +1,16 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "api/feathers.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/feathers",
+        "dest": "/api/feathers.js"
+      }
+    ]
+  }
+  

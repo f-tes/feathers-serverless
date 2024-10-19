@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feathers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1><span id="typewriter"></span></h1>
+        <div class="search-box">
+            <input type="text" id="studentId" placeholder="Enter your Student ID">
+            <button onclick="checkFeathers()">Go!</button>
+        </div>
+        <div id="feathers-count" class="feathers-display"></div> <!-- Feathers count display -->
+    </div>
+    <div id="feathers">
+        <i></i>
+        <i></i>
+    </div>
+
+    <script>
+        const text = "Feathers, made simple.";
+        let index = 0;
+        let deleting = false;
+        
+        function typeWriter() {
+            const typewriterElement = document.getElementById('typewriter');
+            typewriterElement.innerHTML = text.slice(0, index);
+            
+            if (!deleting) {
+                if (index < text.length) {
+                    index++;
+                } else {
+                    setTimeout(() => {
+                        deleting = true;
+                        setTimeout(typeWriter, 100);
+                    }, 2000);
+                    return;
+                }
+            } else {
+                if (index > 0) {
+                    index--;
+                } else {
+                    deleting = false;
+                    setTimeout(typeWriter, 500);
+                    return;
+                }
+            }
+            setTimeout(typeWriter, deleting ? 100 : 150);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            typeWriter();
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
