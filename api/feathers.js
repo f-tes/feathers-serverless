@@ -1,4 +1,4 @@
-const { google } = require('googleapis');
+import { google } from 'googleapis'; // Change require to import
 
 async function getFeathers(studentId) {
   const upperCaseStudentId = studentId.toUpperCase();
@@ -42,6 +42,7 @@ async function getFeathers(studentId) {
   }
 }
 
+// Use ES module export syntax
 export default async function handler(req, res) {
   const studentId = req.query.studentId;
   try {
