@@ -1,19 +1,18 @@
 async function checkFeathers() {
     const studentId = document.getElementById('studentId').value.toUpperCase();
     try {
-        const response = await fetch(`/feathers?studentId=${encodeURIComponent(studentId)}`);
+        const response = await fetch(`/api/feathers?studentId=${encodeURIComponent(studentId)}`);
         const data = await response.json();
         
-        // Update the feathers count display
         const feathersCountDisplay = document.getElementById('feathers-count');
         feathersCountDisplay.innerText = `${data.feathers} feathers`;
-        feathersCountDisplay.style.display = 'block'; // Show the display box
+        feathersCountDisplay.style.display = 'block';
         
     } catch (error) {
         console.error('Error:', error);
         const feathersCountDisplay = document.getElementById('feathers-count');
         feathersCountDisplay.innerText = 'Error retrieving data';
-        feathersCountDisplay.style.display = 'block'; // Show the display box
+        feathersCountDisplay.style.display = 'block';
     }
 }
 
