@@ -1,7 +1,8 @@
-import { google } from 'googleapis'; // Change require to import
+import { google } from 'googleapis';
 
 async function getFeathers(studentId) {
   const upperCaseStudentId = studentId.toUpperCase();
+  console.log('Fetching data for student ID:', upperCaseStudentId); // Debug log
 
   const auth = new google.auth.GoogleAuth({
     credentials: {
@@ -27,7 +28,7 @@ async function getFeathers(studentId) {
       range,
     });
 
-    console.log('API Response:', response.data);
+    console.log('API Response:', response.data); // Debug log
 
     const rows = response.data.values || [];
     for (const row of rows) {
@@ -37,19 +38,19 @@ async function getFeathers(studentId) {
     }
     return null;
   } catch (error) {
-    console.error('Error fetching data:', error.message);
-    throw error;
+    console.error('Error fetching data:', error.message); // Log specific error
+    throw error; // Re-throw the error to be caught in the handler
   }
 }
 
-// Use ES module export syntax
 export default async function handler(req, res) {
   const studentId = req.query.studentId;
+  console.log('Received student ID:', studentId); // Debug log
   try {
     const feathers = await getFeathers(studentId);
     res.json({ feathers: feathers || 'Not found' });
   } catch (error) {
-    console.error('Server Error:', error.message);
+    console.error('Server Error:', error.message); // Log the server error message
     res.status(500).json({ error: 'Internal Server Error' });
   }
 }
